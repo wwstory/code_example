@@ -1,0 +1,1 @@
+#cmakedefine USE_MY_MATH    // 将CMakeLists中的宏定义转为.h文件

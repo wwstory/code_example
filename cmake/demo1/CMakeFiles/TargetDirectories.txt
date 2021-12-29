@@ -1,0 +1,4 @@
+/home/dejiang/study/c/cmake/demo2/CMakeFiles/rebuild_cache.dir
+/home/dejiang/study/c/cmake/demo2/CMakeFiles/edit_cache.dir
+/home/dejiang/study/c/cmake/demo2/CMakeFiles/Hello.dir
+/home/dejiang/study/c/cmake/demo2/CMakeFiles/demo.dir
