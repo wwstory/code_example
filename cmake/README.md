@@ -8,3 +8,4 @@
 - demo3: 通过install()设置编译的二进制文件和头文件.h放入指定目录
 - demo3_2: 测试
 - demo4: 同级目录访问
+- demo4_2: 同级目录访问，连锁依赖：src -> lib -> include
