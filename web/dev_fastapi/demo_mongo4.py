@@ -39,7 +39,7 @@ class User(BaseModel):
             }
         }
 
-
+# 很粗糙的处理，不Pythonic
 class IUser(User):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     username: str = Field(...)
@@ -84,7 +84,7 @@ async def list_user():
 
 
 @app.put('/update/{username}', response_model=IUser)
-async def get_user(username:str, query: User = Body(...)):
+async def update_user(username:str, query: User = Body(...)):
     print('-------', query)
     query = {k: v for k, v in query.dict().items() if v is not None}
     print('--', query)
