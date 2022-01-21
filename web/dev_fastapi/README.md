@@ -22,6 +22,7 @@
 - demo_mongo3.py : 关闭连接的影响
 - demo_mongo4.py : fastapi+mongo
 - demo_mongo5.py : 多个集合关联查找
+- demo_mongo6.py : 获取递增id
 - demo_pydantic1.py : 基本操作
 - demo_pydantic2.py : 基本操作
 - demo_pydantic2.py : mongodb的_id转换
