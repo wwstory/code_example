@@ -37,24 +37,24 @@ async def get_item(id: int):
 
 
 from fastapi import Request, status
+from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse, PlainTextResponse
 from fastapi.exceptions import RequestValidationError, HTTPException
 
 @app.exception_handler(RequestValidationError)
-async def my_request_validation_exception_handler(request: Request, exc: RequestValidationError):   # 数据验证时
+async def my_request_validation_exception_handler(request: Request, e: RequestValidationError):   # 数据验证时
     print('---------------xxxxxxxxx--------------------')
-    # return PlainTextResponse('hello', status_code=exc.status_code)    # 返回朴素字符串
+    # return PlainTextResponse('hello', status_code=e.status_code)    # 返回朴素字符串
     return JSONResponse(
         status_code=400,
-        # content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
+        # content=jsonable_encoder({"detail": exc.errors(), "body": e.body}),
         content={"status": 1001, "message": 'hi error!'},
     )
 
 @app.exception_handler(HTTPException)
-async def my_http_exception_handler(request: Request, exc: HTTPException):  # 请求无效数据时
+async def my_http_exception_handler(request: Request, e: HTTPException):  # 请求无效数据时
     print('---------------yyyyyyyyyy--------------------')
     return JSONResponse(
-        status_code=exc.status_code,
-        # content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
-        content={"status": 1002, "message": 'ni hao error!'},
+        status_code=e.status_code,
+        content={"status": 1002, "message": e.detail},
     )
