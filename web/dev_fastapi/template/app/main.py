@@ -6,6 +6,7 @@ import os, importlib
 
 app = FastAPI()
 
+# cors
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -13,7 +14,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-load_exception_handler(app)
+
+load_exception_handler(app) # custom handle exception
 
 # automatically load router from app/routers
 for router_file in os.listdir('app/routers'):
