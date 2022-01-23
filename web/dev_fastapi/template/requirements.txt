@@ -1,0 +1,9 @@
+fastapi[all]
+minio
+python-jose[cryptography]
+passlib[bcrypt]
+sqlalchemy
+pytest
+pymongo
+motor
+easydict
