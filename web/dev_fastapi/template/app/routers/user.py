@@ -13,13 +13,13 @@ fake_db = [
 
 
 @router.post('/user', response_model=User)
-def create_user(user: User):
+async def create_user(user: User):
     fake_db.append(user.dict())
     return user
 
 
 @router.get('/user/{id}', response_model=User)
-def get_user(id: int):
+async def get_user(id: int):
     if id == 4:
         raise HTTPException(status_code=418, detail="Nope! I don't like 4.")
     user = User(**fake_db[id])
@@ -27,6 +27,6 @@ def get_user(id: int):
 
 
 @router.get('/users', response_model=List[User])
-def get_users():
+async def get_users():
     user = fake_db
     return user
