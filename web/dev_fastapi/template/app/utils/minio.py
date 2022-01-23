@@ -36,14 +36,14 @@ async def upload_object(file: UploadFile, prefix='', bucket_name=conf.minio.buck
 
 async def get_object_content(object_name, bucket_name=conf.minio.bucket):
     try:
-        data = minioClient.fget_object(bucket_name, object_name)
+        data = minioClient.get_object(bucket_name, object_name)
         return StreamingResponse(data.stream())
     except InvalidResponseError as e:
         raise e
 
 
 async def get_object_json(object_name, bucket_name=conf.minio.bucket):
-    return get_object_content(object_name, bucket_name=bucket_name)
+    return await get_object_content(object_name, bucket_name=bucket_name)
 
 
 async def get_object_url(object_name, bucket_name=conf.minio.bucket, use_presigned=False, expires=timedelta(days=7)) -> str:

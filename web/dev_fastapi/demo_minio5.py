@@ -23,6 +23,6 @@ async def get_content():
         print(err)
     # 以下四种方式都可以实现：
     # return json.loads(obj.data.decode())
-    # return json.loads(obj.data)               # json直接解析二进制数据
+    # return json.loads(obj.data)               # json直接解析二进制数据, 不会解析unicode编码
     return StreamingResponse(obj.stream())
     # return FileResponse('./tmp.json')        # 从本地文件返回
