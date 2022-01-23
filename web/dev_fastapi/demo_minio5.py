@@ -2,6 +2,7 @@
 from minio import Minio
 from minio.error import InvalidResponseError
 from fastapi import FastAPI
+from fastapi.responses import StreamingResponse, FileResponse
 import json
 
 
@@ -20,5 +21,8 @@ async def get_content():
         obj = minioClient.get_object('wwbucket', 'tmp.json')
     except InvalidResponseError as err:
         print(err)
+    # 以下四种方式都可以实现：
     # return json.loads(obj.data.decode())
-    return json.loads(obj.data)             # json直接解析二进制数据
+    # return json.loads(obj.data)               # json直接解析二进制数据
+    return StreamingResponse(obj.stream())
+    # return FileResponse('./tmp.json')        # 从本地文件返回
