@@ -46,7 +46,7 @@ class IUser(User):
     password: Optional[str] = None
 
     class Config:
-        allow_population_by_field_name = True
+        allow_population_by_field_name = True   # https://www.5axxw.com/questions/content/oveaou
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
         schema_extra = {
