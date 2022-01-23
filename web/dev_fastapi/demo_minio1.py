@@ -16,7 +16,8 @@ except MinioException as err:
     pass
 else:
     try:
-        # minioClient.fput_object('wwbucket', '/dir/tmp.log', './tmp.log')
+        # minioClient.fput_object('wwbucket', '/dir/serah.jpg', './serah.jpg')
+        # minioClient.fput_object('wwbucket', 'dir/serah.jpg', './serah.jpg')
         minioClient.fput_object('wwbucket', 'serah.jpg', './serah.jpg')
     except MinioException as err:
         print(err)
