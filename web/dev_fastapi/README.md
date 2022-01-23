@@ -16,6 +16,7 @@
 - demo_minio1.py : minio创建桶，上传文件（公共服务器）
 - demo_minio2.py : minio下载文件（公共服务器）
 - demo_minio3.py : minio获取url（公共服务器）
+- demo_minio3.py : 上传打开的文件（公共服务器）
 - demo_minio_local1.py : minio创建桶，上传文件（自建）
 - demo_minio_local2.py : minio下载文件（自建）
 - demo_minio_local3.py : minio获取url（自建）
