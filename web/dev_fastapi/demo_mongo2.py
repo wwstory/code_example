@@ -25,6 +25,7 @@ async def do_find():
     # async for r in coll.find({"username": "test1"}):
     #     print(r)
     # print([r async for r in coll.find({"username": "test1"})])
+    # r = await coll.find({"username": "test1"}).to_list(length=None)
     r = await coll.find({"username": "test1"}).to_list(length=10)
     print(r)
     print('查---')
