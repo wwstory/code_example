@@ -9,7 +9,7 @@ def load_exception_handler(app: FastAPI):
     async def my_request_validation_exception_handler(request: Request, e: RequestValidationError):
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
-            content={'status': status.HTTP_400_BAD_REQUEST, 'msg': '无效的参数'},
+            content={'status': status.HTTP_400_BAD_REQUEST, 'msg': f'数据验证错误: {e.errors}'},
         )
 
 

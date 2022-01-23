@@ -12,6 +12,9 @@ class BaseModel(pydantic.BaseModel):
 
 
 class PyObjectId(ObjectId):
+    '''
+    将mongodb的_id字段对应的ObjectId类型与str类型转换
+    '''
     @classmethod
     def __get_validators__(cls):
         yield cls.validate
@@ -25,3 +28,25 @@ class PyObjectId(ObjectId):
     @classmethod
     def __modify_schema__(cls, field_schema):
         field_schema.update(type="string")
+
+
+class Datetime(datetime):
+    '''
+    将date类型转为datetime类型
+    '''
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, t):
+        try:
+            t = datetime.strptime(t, '%Y-%m-%d')
+        except:
+            raise ValueError("Invalid date")
+        return t
+
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type="string")
+
