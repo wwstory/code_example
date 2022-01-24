@@ -6,6 +6,7 @@ from httpx import AsyncClient
 from app.main import app
 
 
+# @pytest.mark.anyio    # depends trio, it cause twice call (数据插入将会执行2次)
 @pytest.mark.asyncio
 async def test_post_user():
     # async with AsyncClient(app=app, base_url='http://127.0.0.1:8000') as ac:  # 由于router中带有await,会报错,原因暂未明确
