@@ -15,7 +15,7 @@ def get_db():
         pass
 
 
-async def get_collection_counter_id(collection_name='test') -> int:
+async def get_and_inc_collection_counter_id(collection_name='test') -> int:
     result = await db['counter_id'].find_one_and_update(
         {'collection': collection_name},    # 查询
         {'$inc': {'id': 1}},                # 递增字段
@@ -26,7 +26,7 @@ async def get_collection_counter_id(collection_name='test') -> int:
     return result.get('id')
 
 
-class GetCounterId:
+class GetIncCounterId:
     '''
     使用类包装get_collection_counter_id方法
     '''
@@ -44,3 +44,12 @@ class GetCounterId:
             return_document=True,
         )
         return result.get('id')
+
+
+async def get_collection_counter_id(collection_name='test') -> int:
+    result = await db['counter_id'].find_one(
+        {'collection': collection_name},    # 查询
+        projection={'id': True, '_id': False},  # 返回的字段
+    )
+    return result.get('id')
+

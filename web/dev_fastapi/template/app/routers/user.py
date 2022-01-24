@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 
 from ..model.schemas.user import User
-from ..utils.database import GetCounterId
+from ..utils.database import GetIncCounterId
 
 router = APIRouter(tags=['用户管理'])
 
@@ -14,7 +14,7 @@ fake_db = [
 
 
 @router.post('/user', response_model=User)
-async def create_user(user: User, id: int = Depends(GetCounterId('test').get_id)):
+async def create_user(user: User, id: int = Depends(GetIncCounterId('test').get_id)):
     print('#', id)
     fake_db.append(user.dict())
     return user
