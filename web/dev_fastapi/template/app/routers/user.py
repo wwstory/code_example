@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from typing import List
 
 from ..model.schemas.user import User
@@ -14,7 +14,7 @@ fake_db = [
 
 
 @router.post('/user', response_model=User)
-async def create_user(user: User, id: int = Depends(GetCounterId('user').get_id):
+async def create_user(user: User, id: int = Depends(GetCounterId('test').get_id)):
     print('#', id)
     fake_db.append(user.dict())
     return user
