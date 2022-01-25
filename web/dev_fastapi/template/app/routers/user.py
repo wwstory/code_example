@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Path, File, UploadFile
 from typing import List
 
 from ..model.schemas.user import User
 from ..utils.database import GetIncCounterId
+from ..utils.minio import upload_object, get_object_json
 
 router = APIRouter(tags=['用户管理'])
 
@@ -32,3 +33,15 @@ async def get_user(id: int):
 async def get_users():
     user = fake_db
     return user
+
+
+@router.post('/file')
+async def upload_file(file: UploadFile = File(...),):
+    file_name = await upload_object(file)
+    return {'file_name': file_name}
+
+
+@router.get('/file/{file_name}')
+async def get_file(file_name: str = Path(...)):
+    response = await get_object_json(file_name)
+    return response

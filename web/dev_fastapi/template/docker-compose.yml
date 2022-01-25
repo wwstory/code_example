@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  sft-server:
+  demo-server:
     build: .
     ports:
       - 8000:8000
@@ -34,6 +34,10 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+      - MONGO_USER_NAME=${MONGO_USER_NAME}          # custom from run.sh
+      - MONGO_USER_PASSWORD=${MONGO_USER_PASSWORD}  # custom from run.sh
+      - MONGO_DATABASE=${MONGO_DATABASE}            # custom from run.sh
     volumes:
       - ./tools/init_mongo.sh:/docker-entrypoint-initdb.d/init_mongo.sh:ro  # https://hub.docker.com/_/mongo #Initializing a fresh instance
       - ./storage/mongo:/data
