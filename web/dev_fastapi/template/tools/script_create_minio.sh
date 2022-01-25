@@ -14,7 +14,7 @@ docker run -d \
     -v ${LOAL_PATH}:/data \
     minio/minio server /data
 
-sleep 2
+sleep 5
 
 # http://docs.minio.org.cn/docs/master/minio-client-complete-guide
 # docker run --rm minio/mc ls play

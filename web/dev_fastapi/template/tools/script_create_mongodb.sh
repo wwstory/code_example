@@ -25,7 +25,7 @@ docker run -d --name mongo -p 27017:27017 \
     mongo --auth
 
 # 新增-e后，延时从2s->3s才能完成
-sleep 3
+sleep 5
 
 docker exec -i mongo bash <<EOF
 mongo
