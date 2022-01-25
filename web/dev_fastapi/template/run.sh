@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 所有run.sh的环境变量，都需要在docker-compose中的services.sft-server.environment再配置一遍。是为了server所处的容器，添加这些环境变量，然后在app/config/conf.yaml中解析。
+# 所有run.sh的环境变量，都需要在docker-compose中的services.demo-server.environment再配置一遍。是为了server所处的容器，添加这些环境变量，然后在app/config/conf.yaml中解析。
 
 # server
 export SERVER_IP=192.168.2.13
@@ -15,5 +15,6 @@ export MONGO_SERVER_IP=${SERVER_IP}
 export MINIO_ACCESS_KEY=minioadmin
 export MINIO_SECRET_KEY=minioadmin
 export MINIO_SERVER_IP=${SERVER_IP}
+export MINIO_BUCKET_NAME=sft
 
 docker-compose up

@@ -9,7 +9,7 @@ mongo:
 minio:
   ip: ${SERVER_IP}
   port: 9000
-  bucket: sft
+  bucket: ${MINIO_BUCKET_NAME}
   access_key: ${MINIO_ACCESS_KEY}
   secret_key: ${MINIO_SECRET_KEY}
   secure: false

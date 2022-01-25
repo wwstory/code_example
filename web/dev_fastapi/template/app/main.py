@@ -29,6 +29,6 @@ for router_file in os.listdir('app/routers'):
 @app.get('/')
 def index():
     return {
-        'project': 'sft',
+        'project': 'demo',
         'version': '2022.1.25.0',
     }

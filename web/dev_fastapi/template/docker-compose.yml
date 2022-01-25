@@ -25,6 +25,7 @@ services:
       - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
       - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
       - MINIO_SERVER_IP=${MINIO_SERVER_IP}
+      - MINIO_BUCKET_NAME=${MINIO_BUCKET_NAME}
 
   # https://docs.docker.com/compose/environment-variables/
   mongo:
