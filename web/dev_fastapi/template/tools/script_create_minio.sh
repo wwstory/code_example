@@ -5,7 +5,7 @@ SECRET_KEY=minioadmin
 LOAL_PATH=/tmp/data
 BUCKET_NAME=sft
 SERVER_NAME=my_minio
-SERVER_URL=http://172.17.0.2:9000
+SERVER_URL=http://172.17.0.2:9000   # 可以手动跑一下查看ip: docker run --rm -p 9000:9000 minio/minio server /data
 
 docker run -d \
     -p 9000:9000 \

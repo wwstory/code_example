@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from .utils.error import load_exception_handler
 import os, importlib
 
+
 app = FastAPI()
 
 # cors
@@ -29,5 +30,5 @@ for router_file in os.listdir('app/routers'):
 def index():
     return {
         'project': 'sft',
-        'version': '2022.1.23.0',
+        'version': '2022.1.25.0',
     }

@@ -3,8 +3,8 @@ from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from ..config import conf
 
 
-client = AsyncIOMotorClient(f'mongodb://{conf.mongodb.username}:{conf.mongodb.password}@{conf.mongodb.ip}:{conf.mongodb.port}/{conf.mongodb.database}')
-db = client[conf.mongodb.database]
+client = AsyncIOMotorClient(f'mongodb://{conf.mongo.username}:{conf.mongo.password}@{conf.mongo.ip}:{conf.mongo.port}/{conf.mongo.database}')
+db = client[conf.mongo.database]
 
 
 def get_db():

@@ -1,15 +1,16 @@
 server:
   port: 8000
-mongodb:
-  ip: 127.0.0.1
+mongo:
+  ip: ${SERVER_IP}
   port: 27017
-  username: root
-  password: "123456"
-  database: sft
+  username: ${MONGO_USER_NAME}
+  password: ${MONGO_USER_PASSWORD}
+  database: ${MONGO_DATABASE}
 minio:
-  ip: 172.17.0.2
+  ip: ${SERVER_IP}
   port: 9000
   bucket: sft
-  access_key: minioadmin
-  secret_key: minioadmin
+  access_key: ${MINIO_ACCESS_KEY}
+  secret_key: ${MINIO_SECRET_KEY}
   secure: false
+  policy: public

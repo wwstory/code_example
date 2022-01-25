@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  sft-server:
+    build: .
+    ports:
+      - 8000:8000
+    working_dir: /root/proj
+    restart: always
+    command: "uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    depends_on:
+      - mongo
+      - minio
+    environment:
+      # server
+      - SERVER_IP=${SERVER_IP}
+      # mongo
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_USER_NAME=${MONGO_USER_NAME}
+      - MONGO_USER_PASSWORD=${MONGO_USER_PASSWORD}
+      - MONGO_DATABASE=${MONGO_DATABASE}
+      - MONGO_SERVER_IP=${MONGO_SERVER_IP}
+      # minio
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - MINIO_SERVER_IP=${MINIO_SERVER_IP}
+
+  # https://docs.docker.com/compose/environment-variables/
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./tools/init_mongo.sh:/docker-entrypoint-initdb.d/init_mongo.sh:ro  # https://hub.docker.com/_/mongo #Initializing a fresh instance
+      - ./storage/mongo:/data
+    restart: always
+    command: --auth
+  
+  # http://docs.minio.org.cn/docs/master/deploy-minio-on-docker-compose
+  minio:
+    image: minio/minio
+    ports:
+      - 9000:9000
+    volumes:
+      - ./storage/minio:/data
+    environment:
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+    restart: always
+    command: server --address 0.0.0.0:9000 /data
