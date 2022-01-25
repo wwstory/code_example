@@ -28,7 +28,7 @@ except InvalidResponseError as e:
 #     raise
 
 
-async def upload_object(file: UploadFile, prefix='', bucket_name=conf.minio.bucket, use_uuid=True) -> str:
+def upload_object(file: UploadFile, prefix='', bucket_name=conf.minio.bucket, use_uuid=True) -> str:
     global minioClient
     try:
         file_size = os.fstat(file.file.fileno()).st_size
@@ -40,7 +40,7 @@ async def upload_object(file: UploadFile, prefix='', bucket_name=conf.minio.buck
         raise e
 
 
-async def get_object_content(object_name, bucket_name=conf.minio.bucket):
+def get_object_content(object_name, bucket_name=conf.minio.bucket):
     global minioClient
     try:
         data = minioClient.get_object(bucket_name, object_name)
@@ -49,7 +49,7 @@ async def get_object_content(object_name, bucket_name=conf.minio.bucket):
         raise e
 
 
-async def get_object_json(object_name, bucket_name=conf.minio.bucket):
+def get_object_json(object_name, bucket_name=conf.minio.bucket):
     global minioClient
     try:
         data = minioClient.get_object(bucket_name, object_name)
@@ -58,7 +58,7 @@ async def get_object_json(object_name, bucket_name=conf.minio.bucket):
         raise e
 
 
-async def get_object_url(object_name, bucket_name=conf.minio.bucket, use_presigned=False, expires=timedelta(days=7)) -> str:
+def get_object_url(object_name, bucket_name=conf.minio.bucket, use_presigned=False, expires=timedelta(days=7)) -> str:
     if use_presigned:
         file_url = f'{conf.minio.ip}:{conf.minio.port}/{bucket_name}/{object_name}'
     else:

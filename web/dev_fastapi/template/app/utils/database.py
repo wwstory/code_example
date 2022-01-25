@@ -1,9 +1,10 @@
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+from pymongo import MongoClient
+from pymongo.database import Database
 
 from ..config import conf
 
 
-client = AsyncIOMotorClient(f'mongodb://{conf.mongo.username}:{conf.mongo.password}@{conf.mongo.ip}:{conf.mongo.port}/{conf.mongo.database}')
+client = MongoClient(f'mongodb://{conf.mongo.username}:{conf.mongo.password}@{conf.mongo.ip}:{conf.mongo.port}/{conf.mongo.database}')
 db = client[conf.mongo.database]
 
 
@@ -15,8 +16,8 @@ def get_db():
         pass
 
 
-async def get_and_inc_collection_counter_id(collection_name='test') -> int:
-    result = await db['counter_id'].find_one_and_update(
+def get_and_inc_collection_counter_id(collection_name='test') -> int:
+    result = db['counter_id'].find_one_and_update(
         {'collection': collection_name},    # 查询
         {'$inc': {'id': 1}},                # 递增字段
         upsert=True,                        # 如果不存在，将新建
@@ -35,8 +36,8 @@ class GetIncCounterId:
         self.db = db
         self.collection_name = collection_name
     
-    async def get_id(self):
-        result = await self.db['counter_id'].find_one_and_update(
+    def get_id(self):
+        result = self.db['counter_id'].find_one_and_update(
             {'collection': self.collection_name},
             {'$inc': {'id': 1}},
             upsert=True,
@@ -46,8 +47,8 @@ class GetIncCounterId:
         return result.get('id')
 
 
-async def get_collection_counter_id(collection_name='test') -> int:
-    result = await db['counter_id'].find_one(
+def get_collection_counter_id(collection_name='test') -> int:
+    result = db['counter_id'].find_one(
         {'collection': collection_name},    # 查询
         projection={'id': True, '_id': False},  # 返回的字段
     )
