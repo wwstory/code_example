@@ -31,6 +31,7 @@
 - demo_pydantic1.py : 基本操作
 - demo_pydantic2.py : 基本操作
 - demo_pydantic2.py : mongodb的_id转换
+- demo_casbin/ : 权限管理
 
 - script_create_mongodb.sh : 启动mongodb，创建用户
 - serah.jpg : 测试用
