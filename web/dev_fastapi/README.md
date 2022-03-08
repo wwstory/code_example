@@ -32,6 +32,7 @@
 - demo_pydantic2.py : 基本操作
 - demo_pydantic2.py : mongodb的_id转换
 - demo_casbin/ : 权限管理
+- demo_python1 : 为获取装饰器。使用inspect解析源码，或配合ast抽象语法树分析。
 
 - script_create_mongodb.sh : 启动mongodb，创建用户
 - serah.jpg : 测试用
