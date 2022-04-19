@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ws</title>
+
+    <!-- 主要逻辑在这个js里面 -->
+
+    <div>
+        <button onclick="start()">连接视频</button>
+    </div>
+
+    <br>
+    <div>
+        <img src="" id="Camera" alt="摄像头" style="text-align:left; width: 640px; height: 480px;">
+
+    </div>
+
+    <script type="text/javascript">
+
+        // ws
+        function start() {
+            connecteClient();
+        }
+
+        function connecteClient() {
+            // 打开一个 web socket
+            var ws = new WebSocket("ws://127.0.0.1:3000/img");
+
+            // 连接建立后的回调函数
+            ws.onopen = function () {
+                console.log("WebSocket 连接成功");
+            };
+
+            // 接收到服务器消息后的回调函数
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+                // console.log("输出的内容" + received_msg);
+
+                /* blob格式再转换为base64格式 */
+                blobToDataURI(received_msg, function (result) {
+                    // console.log("解析base64: " + result);
+                    document.getElementById("Camera").src = result;
+                })
+
+            };
+
+            // 连接关闭后的回调函数
+            ws.onclose = function () {
+                // 关闭 websocket
+                alert("连接已关闭...");
+            };
+        }
+
+        /* blob格式转换为base64格式 */
+        function blobToDataURI(blob, callback) {
+            var reader = new FileReader();
+            reader.readAsBinaryString(blob);
+            reader.onload = function (e) {
+                callback("data:image/jpeg;base64," + e.target.result);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
